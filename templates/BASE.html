@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+	<!-- 
+      Web Design and Scripting
+      Copyright (c) 2013 Brandon Thomas <bt@brand.io>
+      See more at http://brand.io
+	-->
+    <meta name="viewport" 
+          content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="Brandon Thomas">
+
+    <title>{% block title %}iSchool Initiative Live Map{% endblock %}</title>
+
+    <!-- TODO: Final version: Compile all of this! -->
+    <link href="/static/css/yui-reset.css" rel="stylesheet">
+    <link href="/static/css/font-awesome.min.css" rel="stylesheet">
+
+    {% if config.DEV_MACHINE %}
+        <link href="/static/less/main.less{{ cache_buster() }}" 
+              rel="stylesheet/less">
+        <link href="/static/img/favicon_dev.png" rel="shortcut icon">
+    {% else %}
+        <link href="/static/design.out.css" rel="stylesheet">
+        <link href="/static/img/favicon.png" rel="shortcut icon">
+    {% endif %}
+    
+    {% block extraHead %}{% endblock %}
+
+  </head>
+  <body>
+    <div id="main" class="{{ pageName }}">
+      {% block header %}
+      {% endblock header %}
+
+      <section>
+      {% block body %}
+        <!-- Body content -->
+      {% endblock %}
+      </section>
+
+      <footer>
+      </footer>
+    </div>
+    {%if config.ENVIRONMENT_DEV %}
+      <script type="text/javascript">
+          less = {
+              env: 'development',
+              async: false,
+              fileAsync: false,
+              poll: 1000,
+              functions: {},
+              dumpLineNumbers: 'comments',
+              relativeUrls: false,
+          };
+      </script>
+      <script src="/static/js/lib/less.min.js"></script>
+    {% endif %}
+
+    <!-- Libaries -->
+    <script src="/static/js/lib/jquery.js"></script>
+    <script src="/static/js/lib/underscore-min.js"></script>
+    <script src="/static/js/lib/backbone-min.js"></script>
+
+    <!-- Our scripting -->
+    <!--
+    <script src="/static/js/fixed.js{{ cache_buster() }}"></script>
+    -->
+    <script type="text/javascript">
+      $(function() {
+          // Nothing yet.
+      });
+    </script>
+    {% block extraBody %}{% endblock %}
+  </body>
+</html>
