@@ -1,0 +1,24 @@
+# Temp files, dotfiles, config, tooling, etc
+.git/
+.gitignore
+.dropbox
+*~
+*pyc
+
+# Build and deploy tools, dirs
+output/
+upload_production.sh
+upload_staging.sh
+deploy_production.sh
+deploy_staging.sh
+build.py
+
+# Misc
+ignoreme
+exclude.txt
+README.md
+
+# Project-specific
+static/
+img/ASSET_ORIGINAL
+static/img/ASSET_ORIGINAL
