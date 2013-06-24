@@ -8,44 +8,34 @@ var FormView = Backbone.Model.extend({
 		var that = this;
 		
 		this.$el = $('#formContainer');
+		this.$grab = this.$el.find('#grabHandle');
 
-		console.log(this.$el);
-
-		this.$el.on('dragstart', function(ev) {
+		this.$grab.on('dragstart', function(ev) {
 			ev.preventDefault();
 			return false;
-		})
-		.on('mousedown', function(ev) 
+		});
+
+		this.$grab.on('mousedown', function(ev) 
 		{
-			var w = $(this).outerWidth()/2,
-				h = $(this).outerHeight()/2;
+			var w = that.$grab.outerWidth()/2,
+				h = that.$grab.outerHeight()/2;
 
 			that.$el.addClass('dragging');
-					//.attr('unselectable', 'on');
-			/*$(window).on('mousemove',
-				function(ev) {
-					that.$el.offset({
-						top: ev.pageY - h,
-						left: ev.pageX - w,
-					});
-			});*/
 			$('body').on('mousemove', function(ev)
 			{
 				if(!that.$el.hasClass('dragging')){
 					return;
 				}
-				console.log('dragging');
 				that.$el.offset({
 					top: ev.pageY - h,
 					left: ev.pageX - w,
-				})
-			})
+				});
+			});
 
 		})
-		.on('mouseup', function(ev) 
+		this.$el.on('mouseup', function(ev) 
 		{
 			that.$el.removeClass('dragging');
-					//.removeAttr('unselectable');
 		});
 	},
 });

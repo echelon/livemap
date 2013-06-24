@@ -46,16 +46,29 @@ table {
 
 #formContainer {
 	.no-select;
-	width: 500px;
-	border: 2px solid red;
 	position: absolute;
-	z-index: 100;
+	font-size: 0.8em;
 	top: 0;
 	left: 0;
-	img {
-		.no-select;
-		width: 500px;
-		height: 500px;
+	width: 350px;
+	background-color: rgba(255, 255, 255, 0.8);
+	border: 1px solid @clouds;
+	z-index: 100;
+	padding: 1em;
+	input {
+		border: 1px solid @clouds;
+		background-color: rgba(255, 255, 255, 0.8);
+		display: block;
+		width: 75%;
+		margin: 0.5em auto;
+		padding: 0.5em;
+	}
+	button {
+		display: block;
+		background-color: @clouds;
+		border: 0;
+		padding: 0.5em;
+		margin: auto;
 	}
 }
 
