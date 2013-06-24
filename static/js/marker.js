@@ -1,5 +1,6 @@
 
 var Marker = Backbone.Model.extend({
+	url: '/api/locations',
 	view: null,
 	defaults: {
 		// position is in map coordinates, not browser coordinates
@@ -9,9 +10,31 @@ var Marker = Backbone.Model.extend({
 	initialize: function() {
 		this.view = new MarkerView({model: this});
 		this.view.render();
+		console.log('new marker:', this.get('position'));
 	},
 	move: function(x, y) {
 		this.set('position', {x:x, y:y});
+	},
+	postNew: function() {
+		// TODO: use jQuery promises
+		// TODO: write actual backbone
+		var pos = this.get('position');
+
+		$.ajax({
+			url: this.url,
+			data: { 
+				'position_x': pos.x,
+				'position_y': pos.y,
+			},
+			type: 'POST',
+			dataType: 'html',
+			success: function(data, textStatus, xhr) {
+				console.log('POST success');
+			},
+			error: function(xhr, textStatus, errorThrown) {
+				console.log('POST error');
+			},
+		});
 	},
 });
 

@@ -12,12 +12,22 @@ var install_livemap = function()
 	window.markers = null;
 	window.map = null;
 	window.livemap = new AppView();
-	window.markers = new Markers();
-	window.map = new Map();
 }
 
 var AppView = Backbone.View.extend({
 	initialize: function() {
+
+		window.markers = new Markers();
+		window.map = new Map();
+
+		window.markers.fetch({
+			url: '/api/locations',
+		})
+		.complete(function() {
+			console.log(window.markers.length);
+			console.log(window.markers);
+		})
+
 	},
 });
 

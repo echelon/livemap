@@ -5,7 +5,8 @@ import string
 import json
 
 from sqlalchemy import Column, Integer, String, DateTime,\
-						Boolean, Table, Text, ForeignKey
+						Boolean, Table, Text, ForeignKey,\
+						Float
 
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship, backref
@@ -24,8 +25,8 @@ class Location(Base):
 					default=datetime.datetime.now)
 	"""
 
-	position_x = Column(Integer(255))
-	position_y = Column(Integer(255))
+	position_x = Column(Float(255))
+	position_y = Column(Float(255))
 
 	name = Column(String(512))
 	email = Column(String(512))
@@ -50,26 +51,13 @@ class Location(Base):
 		"""
 		pass
 
-	def serialize(self, users=True):
-		if not users:
-			return {
-				'id': self.id,
-				'title': self.title,
-				'issue': self.issue,
-			}
-
-		users = []
-		for p in self.participants:
-			users.append({
-				'id': p.user.id,
-				'username': p.user.username,
-			})
-
+	def serialize(self):
 		return {
 			'id': self.id,
-			'title': self.title,
-			'issue': self.issue,
-			'users': users
+			'position': {
+				'x': self.position_x,
+				'y': self.position_y,
+			},
 		}
 
 """

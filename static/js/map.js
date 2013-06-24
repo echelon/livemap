@@ -70,7 +70,8 @@ var MapView = Backbone.View.extend({
 			x = ev.pageX - off.left,
 			y = ev.pageY - off.top,
 			xx = 0,
-			yy = 0;
+			yy = 0, 
+			marker = null;
 		
 		// If the browser stretches the images, we need to calculate
 		// the image scaling so we can remap the click points to the
@@ -78,9 +79,14 @@ var MapView = Backbone.View.extend({
 		xx = x * srcWidth / this.$el.innerWidth();
 		yy = y * srcHeight / this.$el.innerHeight();
 
-		window.markers.push(new Marker({
+		marker = new Marker({
 			position: {x: xx, y: yy}
-		}));
+		});
+		window.markers.push(marker);
+		console.log('save');
+		marker.save(); // TODO: Actual backbone
+		console.log('postNew');
+		marker.postNew();
 	},
 });
 
