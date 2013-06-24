@@ -26,7 +26,7 @@ FLASK_PATH = os.path.dirname(os.path.abspath(__file__))
 uname = getpass.getuser()
 
 if uname in ['brandon']:
-	app.config['DEV_MACHINE'] = True
+	app.config['ENVIRONMENT_DEV'] = True
 elif uname in ['isimobile', 'root']:
 	app.config['ENVIRONMENT_PRODUCTION'] = True
 

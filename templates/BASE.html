@@ -17,7 +17,7 @@
     <link href="/static/css/yui-reset.css" rel="stylesheet">
     <link href="/static/css/font-awesome.min.css" rel="stylesheet">
 
-    {% if config.DEV_MACHINE %}
+    {% if config.ENVIRONMENT_DEV %}
         <link href="/static/less/main.less{{ cache_buster() }}" 
               rel="stylesheet/less">
         <link href="/static/img/favicon_dev.png" rel="shortcut icon">

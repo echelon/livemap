@@ -4,6 +4,10 @@
 
 {% block extraBody %}
   <script type="text/javascript"
+    src="/static/js/map.js{{ cache_buster() }}"></script>
+  <script type="text/javascript"
+    src="/static/js/marker.js{{ cache_buster() }}"></script>
+  <script type="text/javascript"
     src="/static/js/livemap.js{{ cache_buster() }}"></script>
   <script type="text/javascript">
     $(function() {
@@ -20,8 +24,7 @@
 
 
 {% block body %}
-  <h1>Live Map</h1>
   <div id="mapContainer">
-   <img src="/static/img/badmap.gif" id="map">
+   <img src="/static/img/map_1500.png" id="map">
   </div>
 {% endblock body %}
