@@ -10,14 +10,19 @@ from sqlalchemy import Column, Integer, String, DateTime,\
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship, backref
 
+#from flask.ext.wtf import Form, BooleanField, TextField, \
+#		PasswordField, validators
+
 from database import Base
 
 class Location(Base):
 	__tablename__ = 'locations'
 	id = Column(Integer, primary_key=True)
 
-	datetime_added = Column(DateTime, nullable=False,
+	"""
+	datetime_added = Column(DateTime, nullable=True,
 					default=datetime.datetime.now)
+	"""
 
 	position_x = Column(Integer(255))
 	position_y = Column(Integer(255))
@@ -67,4 +72,24 @@ class Location(Base):
 			'users': users
 		}
 
+"""
+class LocationForm(Form):
+    position_x = TextField('x',
+			[validators.Length(min=0, max=7)])
 
+    position_y = TextField('y',
+			[validators.Length(min=0, max=7)])
+
+    name = TextField('Name',
+			[validators.Length(min=2, max=255)])
+
+    email = TextField('Email Address',
+			[validators.Length(min=4, max=95)])
+
+    phone = TextField('Phone',
+			[validators.Length(min=4, max=20)])
+
+    school = TextField('School/Institution',
+			[validators.Length(min=4, max=255)])
+
+"""

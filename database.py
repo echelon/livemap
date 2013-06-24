@@ -107,5 +107,5 @@ class Sqlite(Database):
 # TODO: Creation factory instead of if/else ?  Maybe? But why?
 database = Sqlite(SQLITE_DB_FILE)
 Base.query = database.session.query_property()
-
+session = database.session
 

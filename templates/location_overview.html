@@ -1,0 +1,65 @@
+{% extends "BASE.html" %}
+{% set pageName = 'LocationListPage' %}
+{% block title %}Locaton List{% endblock %}
+
+{% block extraBody %}
+{% endblock %}
+
+{% block body %}
+
+<div class="tableWrap">
+  <h1>Location List</h1>
+  <table>
+    <tr>
+      <th>ID</th>
+      <th>Coordinate</th>
+      <th>Name</th>
+      <th>School</th>
+      <th>Email</th>
+      <th>Phone</th>
+  {% for loc in locations %}
+    <tr>
+      <td>{{ loc.id }}</td>
+      <td>{{ loc.position_x }}, {{ loc.position_y }}</td>
+      <td>{{ loc.name }}</td>
+      <td>{{ loc.school }}</td>
+      <td>{{ loc.email }}</td>
+      <td>{{ loc.phone }}</td>
+    </tr>
+  {% endfor %}
+  </table>
+
+  <h1>Location Entry</h1>
+
+  <form method="post">
+    <table>
+      <tr>
+        <td>position_x</td>
+        <td><input name="position_x"></td>
+      </tr>
+      <tr>
+        <td>position_y</td>
+        <td><input name="position_y"></td>
+      </tr>
+      <tr>
+        <td>name</td>
+        <td><input name="name"></td>
+      </tr>
+      <tr>
+        <td>email</td>
+        <td><input name="email"></td>
+      </tr>
+      <tr>
+        <td>phone</td>
+        <td><input name="phone"></td>
+      </tr>
+      <tr>
+        <td>shcool</td>
+        <td><input name="school"></td>
+      </tr>
+    </table>
+    <p><input type="submit" value="Add Location"></p>
+  </form>
+</div>
+{% endblock body %}
+

@@ -9,10 +9,10 @@ import os
 import sys
 import getpass
 from flask import Flask, render_template, url_for, request
-from flask import send_from_directory, send_file
+from flask import send_from_directory, send_file, redirect
 
 import database
-#import model
+from model import *
 
 # -------------
 # CONFIGURATION
@@ -48,6 +48,52 @@ with app.test_request_context():
 def page_index():
 	return render_template('map.html')
 
+
+@app.route('/locations', methods=['GET', 'POST'])
+def page_location_add():
+	location = None
+	if request.form and len(request.form):
+
+		location = Location(
+			position_x = request.form['position_x'],
+			position_y = request.form['position_y'],
+			name = request.form['name'],
+			email = request.form['email'],
+			phone = request.form['phone'],
+			school = request.form['school'],
+		)
+
+		database.session.add(location)
+		database.session.commit()
+
+		return redirect('/locations')
+
+	locations = database.session.query(Location).all()
+
+	return render_template('location_overview.html',
+			locations=locations)
+
+
+@app.route('/loc/<int:lid>')
+def page_location(lid):
+	print lid
+	try:
+		location = database.session.query(Location).filter_by(id=lid).one()
+	except Exception as e:
+		print 'test'
+		print e
+
+	return render_template('location.html')
+
+@app.route('/location/list')
+def page_location_list():
+	print "\n\n"
+	locations = database.session.query(Location).all()
+	print "\n\n"
+	print locations
+	print len(locations)
+	return render_template('location_list.html', locations=locations)
+
 @app.errorhandler(404)
 @app.route('/404')
 def page_404(e=None):
@@ -72,6 +118,7 @@ def main(port=5000):
 		port = port,
 		host = '0.0.0.0',
 		use_reloader = True,
+		debug = app.config['ENVIRONMENT_DEV'],
 	)
 
 if __name__ == '__main__':
