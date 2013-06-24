@@ -10,8 +10,6 @@ from sqlalchemy import Column, Integer, String, DateTime,\
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship, backref
 
-from flask.ext.login import UserMixin, AnonymousUser
-
 from database import Base
 
 class Location(Base):

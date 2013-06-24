@@ -3,7 +3,7 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import scoped_session, sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
 
-from main import app
+SQLITE_DB_FILE = 'database.sqlite'
 
 Base = declarative_base()
 database = None
@@ -52,7 +52,8 @@ class Database(object):
 
 class Postgres(Database):
 	def __init__(self, autoconnect=True):
-		dbStr = app.config['SQLALCHEMY_DATABASE_URI']
+		#dbStr = app.config['SQLALCHEMY_DATABASE_URI']
+		dbStr = 'TODO'
 		super(Postgres, self).__init__(dbStr, autoconnect)
 
 class Sqlite(Database):
@@ -104,7 +105,7 @@ class Sqlite(Database):
 
 
 # TODO: Creation factory instead of if/else ?  Maybe? But why?
-database = Sqlite(app.config['SQLITE_DB_FILE'])
+database = Sqlite(SQLITE_DB_FILE)
 Base.query = database.session.query_property()
 
 
