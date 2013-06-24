@@ -83,10 +83,7 @@ var MapView = Backbone.View.extend({
 			position: {x: xx, y: yy}
 		});
 		window.markers.push(marker);
-		console.log('save');
 		marker.save(); // TODO: Actual backbone
-		console.log('postNew');
-		marker.postNew();
 	},
 });
 

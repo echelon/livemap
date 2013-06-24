@@ -71,6 +71,10 @@ def page_location_add():
 	return render_template('location_overview.html',
 			locations=locations)
 
+# ----------------
+# AJAX API GATEWAY
+# ----------------
+
 @app.route('/api/locations', methods=['GET', 'POST'])
 def page_location_list():
 	if request.method == 'POST':
@@ -91,13 +95,18 @@ def page_location_list():
 
 		return 'OK' # TODO: status msg.
 
-	locations = None
-	try:
-		locations = database.session.query(Location).all()
-	except:
-		pass
+	else:
+		locations = None
+		try:
+			locations = database.session.query(Location).all()
+		except:
+			pass
 
-	return json.dumps([x.serialize() for x in locations])
+		return json.dumps([x.serialize() for x in locations])
+
+# -------------
+# MISSING FILES
+# -------------
 
 @app.errorhandler(404)
 @app.route('/404')

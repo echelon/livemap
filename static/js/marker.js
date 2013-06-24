@@ -15,7 +15,7 @@ var Marker = Backbone.Model.extend({
 	move: function(x, y) {
 		this.set('position', {x:x, y:y});
 	},
-	postNew: function() {
+	/*postNew: function() {
 		// TODO: use jQuery promises
 		// TODO: write actual backbone
 		var pos = this.get('position');
@@ -35,7 +35,7 @@ var Marker = Backbone.Model.extend({
 				console.log('POST error');
 			},
 		});
-	},
+	},*/
 });
 
 var Markers = Backbone.Collection.extend({
