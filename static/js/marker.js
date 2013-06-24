@@ -46,10 +46,12 @@ var MarkerView = Backbone.View.extend({
 			curWidth = window.map.get('curWidth'),
 			curHeight = window.map.get('curHeight'),
 			srcWidth = window.map.get('srcWidth'),
-			srcHeight = window.map.get('srcHeight');
+			srcHeight = window.map.get('srcHeight'),
+			x = 0,
+			y = 0;
 
-		var x = (pos.x * curWidth / srcWidth) - IMG_MARKER_WIDTH/2;
-		var y = (pos.y * curHeight / srcHeight) - IMG_MARKER_HEIGHT;
+		x = (pos.x * curWidth / srcWidth) - IMG_MARKER_WIDTH/2;
+		y = (pos.y * curHeight / srcHeight) - IMG_MARKER_HEIGHT;
 
 		this.$el.css({
 			top: y,

@@ -64,28 +64,19 @@ var MapView = Backbone.View.extend({
 		});
 	},
 	click: function(ev) {
-		// TODO: offsetXY or position() ?
-		// TODO: Image scaling, page scroll/viewport change, ...
 		var off = this.$el.offset(),
 			srcWidth = this.model.get('srcWidth'),
 			srcHeight = this.model.get('srcHeight'),
 			x = ev.pageX - off.left,
-			y = ev.pageY - off.top;
+			y = ev.pageY - off.top,
+			xx = 0,
+			yy = 0;
 		
-		// If CSS stretches the images, we need to calculate the 
-		// image scaling so we can remap the click points to the
+		// If the browser stretches the images, we need to calculate
+		// the image scaling so we can remap the click points to the
 		// true image coordinates
-
-		var xx = x * srcWidth / this.$el.innerWidth();
-		var yy = y * srcHeight / this.$el.innerHeight();
-
-		/*console.log('Cur Map', 
-				this.$el.innerWidth(), this.$el.innerHeight())
-		console.log('Src Map', this.srcWidth, this.srcHeight);
-
-		console.log('pos', x, y);
-		*/
-		console.log('act pos', xx, yy);
+		xx = x * srcWidth / this.$el.innerWidth();
+		yy = y * srcHeight / this.$el.innerHeight();
 
 		window.markers.push(new Marker({
 			position: {x: xx, y: yy}

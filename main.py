@@ -11,12 +11,16 @@ import getpass
 from flask import Flask, render_template, url_for, request
 from flask import send_from_directory, send_file
 
+import database
+#import model
+
 # -------------
 # CONFIGURATION
 # -------------
 
 app = Flask(__name__)
 
+app.config['SQLITE_DB_FILE'] = 'database.sqlite';
 app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 1
 app.config['ENVIRONMENT_DEV'] = False
 app.config['ENVIRONMENT_PRODUCTION'] = False
