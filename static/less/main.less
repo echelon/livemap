@@ -17,6 +17,8 @@
 body {
 	font-family: 'bryant alternate';
 	background-color: @clouds;
+	overflow: hidden;
+
 }
 
 h1, h2, h3 {
@@ -42,10 +44,33 @@ table {
 	margin: auto;
 }
 
+#formContainer {
+	.no-select;
+	width: 500px;
+	border: 2px solid red;
+	position: absolute;
+	z-index: 100;
+	top: 0;
+	left: 0;
+	img {
+		.no-select;
+		width: 500px;
+		height: 500px;
+	}
+}
+
+.dragging {
+	background-color: #f00 !important;
+	border: 4px dotted #f00;
+	.no-select;
+}
+
 .MapPage {
 	.no-select;
 	#mapContainer {
+
 		position: relative;
+
 		background-color: #fff;
 		max-width: 1400;
 		//border: 2px solid yellow;

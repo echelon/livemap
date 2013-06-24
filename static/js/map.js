@@ -1,7 +1,8 @@
 
 var Map = Backbone.Model.extend({
 	view: null,
-	// Modeling the map helps us respond to resizing.
+	// Modeling the map helps us respond to
+	// resizing.
 	defaults: {
 		srcWidth: 0,
 		srcHeight: 0,
@@ -79,6 +80,7 @@ var MapView = Backbone.View.extend({
 		});
 	},
 	resize: function() {
+		this.fitFold();
 		this.copySize();
 		window.markers.each(function(m) {
 			m.view.render();

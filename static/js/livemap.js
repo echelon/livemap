@@ -20,7 +20,11 @@ var AppView = Backbone.View.extend({
 		window.markers = new Markers();
 		window.map = new Map();
 
-		window.markers.syncEvery(5000);
+		//window.markers.syncEvery(5000);
+	
+		// TODO -- window.form = (model)
+		window.formview = new FormView(); 
+
 		/*window.markers.fetch()
 		.complete(function() {
 			console.log(window.markers.length);

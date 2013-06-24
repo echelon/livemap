@@ -8,6 +8,8 @@
   <script type="text/javascript"
     src="/static/js/marker.js{{ cache_buster() }}"></script>
   <script type="text/javascript"
+    src="/static/js/form.js{{ cache_buster() }}"></script>
+  <script type="text/javascript"
     src="/static/js/livemap.js{{ cache_buster() }}"></script>
   <script type="text/javascript">
     $(function() {
@@ -24,6 +26,9 @@
 
 
 {% block body %}
+  <div id="formContainer">
+    <img src="/static/img/favicon_dev.png">
+  </div>
   <div id="mapContainer">
     <!--<img src="/static/img/map_header_1500.png" id="mapHeader">-->
    <div id="mapWrap">
