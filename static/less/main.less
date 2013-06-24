@@ -19,6 +19,12 @@ body {
 	background-color: @clouds;
 }
 
+h1, h2, h3 {
+	font-size: 2em;
+	padding: 0.7em;
+	font-weight: bold;
+}
+
 table {
 	width: 100%;
 	border: 1px solid #aaa;
@@ -31,12 +37,6 @@ table {
 	}
 }
 
-h1, h2, h3 {
-	font-size: 2em;
-	padding: 0.7em;
-	font-weight: bold;
-}
-
 .tableWrap {
 	max-width: 500px;
 	margin: auto;
@@ -45,24 +45,35 @@ h1, h2, h3 {
 .MapPage {
 	.no-select;
 	#mapContainer {
-		//position: relative;
+		position: relative;
 		background-color: #fff;
 		max-width: 1400;
+		//border: 2px solid yellow;
 
-		img#map {
-			z-index: 5;
+		#mapWrap {
+			position: absolute;
+			top: 0;
 			width: 100%;
-			padding-top: 5000px;
+			//border: 2px solid red;
+			z-index: 5;
+			img#map {
+				display: block;
+				margin: auto;
+				width: 100%;
+				//padding-top: 5000px; // XXX -- fixme!
+				//border: 2px solid blue;
+			}
 		}
 
 		img#mapHeader, img#mapFooter {
-			display: none;
-			z-index: 5;
+			display: none; // XXX
+			z-index: 4;
 			width: 100%;
+			//border: 2px dashed green;
 		}
 
 		img.marker {
-			position: relative;
+			position: absolute;
 			top: 0;
 			left: 0;
 		}

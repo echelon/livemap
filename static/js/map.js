@@ -46,10 +46,31 @@ var MapView = Backbone.View.extend({
 			return false;
 		});
 
+		this.fitFold();
+
 		$(window).on('resize', function() {
 			that.resize();
 		});
 		this.delegateEvents();
+	},
+	// Fit inside the fold
+	fitFold: function() {
+		var eh = this.$el.innerHeight(),
+			wh = $(window).height();
+
+		if(wh > eh) {
+			return;
+		}
+
+		this.$el.css({
+			width: 'auto',
+			height: 'auto',
+		})
+		.css({
+			height: wh - 1,
+		});
+
+		this.copySize();
 	},
 	copySize: function() {
 		this.model.set({

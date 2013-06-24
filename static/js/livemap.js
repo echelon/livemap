@@ -20,14 +20,12 @@ var AppView = Backbone.View.extend({
 		window.markers = new Markers();
 		window.map = new Map();
 
-		window.markers.fetch({
-			url: '/api/locations',
-		})
+		window.markers.syncEvery(5000);
+		/*window.markers.fetch()
 		.complete(function() {
 			console.log(window.markers.length);
 			console.log(window.markers);
-		})
-
+		})*/
 	},
 });
 

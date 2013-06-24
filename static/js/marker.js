@@ -15,35 +15,27 @@ var Marker = Backbone.Model.extend({
 	move: function(x, y) {
 		this.set('position', {x:x, y:y});
 	},
-	/*postNew: function() {
-		// TODO: use jQuery promises
-		// TODO: write actual backbone
-		var pos = this.get('position');
-
-		$.ajax({
-			url: this.url,
-			data: { 
-				'position_x': pos.x,
-				'position_y': pos.y,
-			},
-			type: 'POST',
-			dataType: 'html',
-			success: function(data, textStatus, xhr) {
-				console.log('POST success');
-			},
-			error: function(xhr, textStatus, errorThrown) {
-				console.log('POST error');
-			},
-		});
-	},*/
 });
 
 var Markers = Backbone.Collection.extend({
+	url: '/api/locations',
 	model: Marker,
+	interval: null,
 	initialize: function() {
 		this.on('add', function() { 
 			console.log('collection add');
 		});
+	},
+	syncEvery: function(timeout) {
+		var that = this;
+		console.log('syncing markers...');
+		if(this.interval) {
+			clearInterval(this.interval);
+		}
+		this.interval = setInterval(function() {
+			that.fetch();
+		},
+		timeout);
 	},
 });
 
@@ -59,7 +51,7 @@ var MarkerView = Backbone.View.extend({
 					.attr('src', IMG_MARKER)
 					.addClass('marker');
 
-		$('#mapContainer').append(this.$el);
+		$('#mapWrap').append(this.$el);
 		this.model.on('change', function() {
 			that.render();
 		});
