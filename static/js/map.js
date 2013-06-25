@@ -46,7 +46,7 @@ var Map = Backbone.Model.extend({
 			y: y * srcHeight / curHeight,
 		}
 	},
-	toDisplayCoords: function(width, height) {
+	toDisplayCoords: function(x, y) {
 		var srcWidth = this.get('srcWidth'),
 			srcHeight = this.get('srcHeight'),
 			curWidth = this.get('curWidth'),

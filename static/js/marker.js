@@ -41,10 +41,9 @@ var Markers = Backbone.Collection.extend({
 
 var MarkerView = Backbone.View.extend({
 	model: null,
-	events: {
-		click: 'click',
+	/*events: {
 		dragstart: 'dragstart',
-	},
+	},*/
 	initialize: function() {
 		var that = this;
 		this.$el = $('<img>')
@@ -58,26 +57,14 @@ var MarkerView = Backbone.View.extend({
 	},
 	render: function() {
 		var pos = this.model.get('position'),
-			curWidth = window.livemap.map.get('curWidth'),
-			curHeight = window.livemap.map.get('curHeight'),
-			srcWidth = window.livemap.map.get('srcWidth'),
-			srcHeight = window.livemap.map.get('srcHeight'),
-			x = 0,
-			y = 0;
+			coords = null;
 
-		x = (pos.x * curWidth / srcWidth) - IMG_MARKER_WIDTH/2;
-		y = (pos.y * curHeight / srcHeight) - IMG_MARKER_HEIGHT;
+		coords = window.livemap.map.toDisplayCoords(pos.x, pos.y);
 
 		this.$el.css({
-			top: y,
-			left: x,
+			top: coords.y - IMG_MARKER_HEIGHT,
+			left: coords.x - IMG_MARKER_WIDTH/2,
 		});
-	},
-	click: function() {
-		console.log('marker click');
-	},
-	dragstart: function() {
-		console.log('drag start');
 	},
 	resize: function() {
 		console.log('win resize (marker)');
