@@ -94,42 +94,35 @@ table {
 
 		background-color: #fff;
 		max-width: 1400;
-		//border: 2px solid yellow;
 
 		#mapWrap {
+			width: 100%;
 			position: absolute;
 			top: 0;
-			width: 100%;
-			//border: 2px solid red;
 			z-index: 5;
-			img#map {
+
+			#mapOrange {
 				display: block;
 				margin: auto;
-				width: 100%;
-				//padding-top: 5000px; // XXX -- fixme!
-				//border: 2px solid blue;
+				background-size: contain;
+				background-repeat: no-repeat;
+				background-position: center top;
+				background-image: 
+					url('/static/img/map_with_header.png');
+				#mapGray {
+					background-image: 
+						url('/static/img/map_with_header_grey.png');
+					background-size: contain;
+					background-repeat: no-repeat;
+					background-position: center top;
+				}
 			}
+
 		}
 
 		img#blank {
-			border: 1px solid red;
 			width: 1500px;
 			height: 990px;
-		}
-
-		#mapOrange {
-			border: 1px solid blue;
-			background-size: contain;
-			background-repeat: no-repeat;
-			background-position: center center;
-			background-image: url('/static/img/map_with_header.png');
-			#mapGray {
-				border: 1px solid green;
-				background-image: url('/static/img/map_with_header_grey.png');
-				background-size: contain;
-				background-repeat: no-repeat;
-				background-position: center center;
-			}
 		}
 
 		img.marker {
