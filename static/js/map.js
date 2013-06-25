@@ -82,7 +82,7 @@ var MapView = Backbone.View.extend({
 	resize: function() {
 		this.fitFold();
 		this.copySize();
-		window.markers.each(function(m) {
+		window.livemap.markers.each(function(m) {
 			m.view.render();
 		});
 	},
@@ -105,7 +105,7 @@ var MapView = Backbone.View.extend({
 		marker = new Marker({
 			position: {x: xx, y: yy}
 		});
-		window.markers.push(marker);
+		window.livemap.markers.push(marker);
 		marker.save(); // TODO: Actual backbone
 	},
 });

@@ -14,6 +14,10 @@
 	user-select: none;
 }
 
+.clear {
+	clear: both;
+}
+
 body {
 	font-family: 'bryant alternate';
 	background-color: @clouds;
@@ -46,6 +50,7 @@ table {
 
 #formContainer {
 	.no-select;
+	//display: none;
 	position: absolute;
 	font-size: 0.8em;
 	top: 0;
@@ -63,6 +68,9 @@ table {
 		margin: 0.5em auto;
 		padding: 0.5em;
 	}
+	button#close {
+		float: right;
+	}
 	button {
 		display: block;
 		background-color: @clouds;
@@ -70,13 +78,14 @@ table {
 		padding: 0.5em;
 		margin: auto;
 	}
+
 }
 
 .dragging {
-	background-color: #f00 !important;
-	border: 4px dotted #f00;
-	.no-select;
+	background-color: 
+		rgba(0, 0, 0, 0.2) !important;
 }
+
 
 .MapPage {
 	.no-select;

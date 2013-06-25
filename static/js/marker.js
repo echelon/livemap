@@ -58,10 +58,10 @@ var MarkerView = Backbone.View.extend({
 	},
 	render: function() {
 		var pos = this.model.get('position'),
-			curWidth = window.map.get('curWidth'),
-			curHeight = window.map.get('curHeight'),
-			srcWidth = window.map.get('srcWidth'),
-			srcHeight = window.map.get('srcHeight'),
+			curWidth = window.livemap.map.get('curWidth'),
+			curHeight = window.livemap.map.get('curHeight'),
+			srcWidth = window.livemap.map.get('srcWidth'),
+			srcHeight = window.livemap.map.get('srcHeight'),
 			x = 0,
 			y = 0;
 

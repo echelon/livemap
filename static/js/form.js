@@ -1,5 +1,9 @@
 
 var Form = Backbone.Model.extend({
+	view: null,
+	constructor: function() {
+		this.view = new FormView();
+	},
 });
 
 var FormView = Backbone.Model.extend({
@@ -10,11 +14,16 @@ var FormView = Backbone.Model.extend({
 		this.$el = $('#formContainer');
 		this.$grab = this.$el.find('#grabHandle');
 
+		this.$el.find('#close').on('click',
+			function() { 
+				that.hide();
+			});
+
+		// DRAG DROP SIMULATION!
 		this.$grab.on('dragstart', function(ev) {
 			ev.preventDefault();
 			return false;
 		});
-
 		this.$grab.on('mousedown', function(ev) 
 		{
 			var w = that.$grab.outerWidth()/2,
@@ -37,6 +46,12 @@ var FormView = Backbone.Model.extend({
 		{
 			that.$el.removeClass('dragging');
 		});
+	},
+	show: function() {
+		this.$el.stop().fadeIn();
+	},
+	hide: function() {
+		this.$el.stop().fadeOut();
 	},
 });
 

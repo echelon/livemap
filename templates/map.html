@@ -10,7 +10,9 @@
   <script type="text/javascript"
     src="/static/js/form.js{{ cache_buster() }}"></script>
   <script type="text/javascript"
-    src="/static/js/livemap.js{{ cache_buster() }}"></script>
+    src="/static/js/modality.js{{ cache_buster() }}"></script>
+  <script type="text/javascript"
+    src="/static/js/main.js{{ cache_buster() }}"></script>
   <script type="text/javascript">
     $(function() {
         install_livemap();
@@ -27,7 +29,9 @@
 
 {% block body %}
   <div id="formContainer">
+    <button id="close">x</button>
     <div id="grabHandle">GRAB_ME</div>
+    <div class="clear"></div>
     <form>
       <input name="name" value="Name">
       <input name="email" value="email">
