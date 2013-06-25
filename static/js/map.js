@@ -30,7 +30,7 @@ var MapView = Backbone.View.extend({
 			img = new Image();
 
 		this.model = args.model;
-		this.$el = $('img#map');
+		/*this.$el = $('img#map');
 
 		img.onload = function() {
 			that.model.set({
@@ -47,16 +47,18 @@ var MapView = Backbone.View.extend({
 			return false;
 		});
 
-		this.fitFold();
+		this.fitFold();*/
 
-		$(window).on('resize', function() {
+		this.listenTo(window.livemap, 'change:mode', this.switchedMode);
+
+		/*$(window).on('resize', function() {
 			that.resize();
 		});
-		this.delegateEvents();
+		this.delegateEvents();*/
 	},
 	// Fit inside the fold
 	fitFold: function() {
-		var eh = this.$el.innerHeight(),
+		/*var eh = this.$el.innerHeight(),
 			wh = $(window).height();
 
 		if(wh > eh) {
@@ -71,23 +73,23 @@ var MapView = Backbone.View.extend({
 			height: wh - 1,
 		});
 
-		this.copySize();
+		this.copySize();*/
 	},
 	copySize: function() {
-		this.model.set({
+		/*this.model.set({
 			curWidth: this.$el.innerWidth(),
 			curHeight: this.$el.innerHeight(),
-		});
+		});*/
 	},
 	resize: function() {
-		this.fitFold();
+		/*this.fitFold();
 		this.copySize();
 		window.livemap.markers.each(function(m) {
 			m.view.render();
-		});
+		});*/
 	},
 	click: function(ev) {
-		var off = this.$el.offset(),
+		/*var off = this.$el.offset(),
 			srcWidth = this.model.get('srcWidth'),
 			srcHeight = this.model.get('srcHeight'),
 			x = ev.pageX - off.left,
@@ -106,7 +108,30 @@ var MapView = Backbone.View.extend({
 			position: {x: xx, y: yy}
 		});
 		window.livemap.markers.push(marker);
-		marker.save(); // TODO: Actual backbone
+		marker.save(); // TODO: Actual backbone*/
+	},
+	switchedMode: function() {
+		var curMode = window.livemap.get('mode');
+		console.log('MAP: Mode was switched!');
+		if(curMode == 'exhibit') {
+			this.switchedToExhibit();
+		}
+		else {
+			this.switchedToEntry();
+		}
+	},
+	switchedToExhibit: function() {
+		$('#mapGray')
+			.stop()
+			.css('opacity', 1)
+			.animate({opacity: 0}, 400);
+
+	},
+	switchedToEntry: function() {
+		$('#mapGray')
+			.stop()
+			.css('opacity', 0)
+			.animate({opacity: 1}, 400);
 	},
 });
 

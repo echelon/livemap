@@ -16,7 +16,13 @@ var FormView = Backbone.Model.extend({
 
 		this.$el.find('#close').on('click',
 			function() { 
-				that.hide();
+				// TODO: MOVE OUT TO A HIGHER-VIZ MODE SWITCH
+				// TODO: MOVE OUT TO A HIGHER-VIZ MODE SWITCH
+				// TODO: MOVE OUT TO A HIGHER-VIZ MODE SWITCH
+				// TODO: MOVE OUT TO A HIGHER-VIZ MODE SWITCH
+				// TODO: MOVE OUT TO A HIGHER-VIZ MODE SWITCH
+				// TODO: MOVE OUT TO A HIGHER-VIZ MODE SWITCH
+				window.livemap.switchToExhibit();
 			});
 
 		// DRAG DROP SIMULATION!

@@ -29,6 +29,7 @@
 
 {% block body %}
   <button id="modeSwitch">Mode Switch</button>
+
   <div id="formContainer">
     <button id="close">x</button>
     <div id="grabHandle">GRAB_ME</div>
@@ -40,13 +41,15 @@
       <input name="phone" value="Phone#">
       <button>Submit</button>
     </form>
+
   </div>
   <div id="mapContainer">
-    <!--<img src="/static/img/map_header_1500.png" id="mapHeader">-->
-   <div id="mapWrap">
-     <!--<img src="/static/img/map_1500.png" id="map">-->
-     <img src="/static/img/map_with_header.png" id="map">
-   </div>
-   <!--<img src="/static/img/map_footer_1500.png" id="mapFooter">-->
+    <div id="mapWrap">
+      <div id="mapOrange">
+        <div id="mapGray">
+          <img src="/static/img/blank.png" id="blank">
+        </div>
+      </div>
+    </div>
   </div>
 {% endblock body %}

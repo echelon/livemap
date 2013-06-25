@@ -50,7 +50,7 @@ table {
 
 #formContainer {
 	.no-select;
-	//display: none;
+	display: none;
 	position: absolute;
 	font-size: 0.8em;
 	top: 0;
@@ -78,7 +78,6 @@ table {
 		padding: 0.5em;
 		margin: auto;
 	}
-
 }
 
 .dragging {
@@ -112,11 +111,25 @@ table {
 			}
 		}
 
-		img#mapHeader, img#mapFooter {
-			display: none; // XXX
-			z-index: 4;
-			width: 100%;
-			//border: 2px dashed green;
+		img#blank {
+			border: 1px solid red;
+			width: 1500px;
+			height: 990px;
+		}
+
+		#mapOrange {
+			border: 1px solid blue;
+			background-size: contain;
+			background-repeat: no-repeat;
+			background-position: center center;
+			background-image: url('/static/img/map_with_header.png');
+			#mapGray {
+				border: 1px solid green;
+				background-image: url('/static/img/map_with_header_grey.png');
+				background-size: contain;
+				background-repeat: no-repeat;
+				background-position: center center;
+			}
 		}
 
 		img.marker {
