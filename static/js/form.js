@@ -2,7 +2,7 @@
 var Form = Backbone.Model.extend({
 	view: null,
 	constructor: function() {
-		this.view = new FormView();
+		this.view = new FormView({model: this});
 	},
 });
 
