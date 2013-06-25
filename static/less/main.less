@@ -56,8 +56,9 @@ table {
 	top: 0;
 	left: 0;
 	width: 350px;
-	background-color: rgba(255, 255, 255, 0.8);
-	border: 1px solid @clouds;
+	background-color: rgba(243, 156, 18, 0.7); // this is @orange
+	//background-color: rgba(230, 126, 34, 0.5); // this is @carrot
+	border: 1px solid rgb(243, 156, 18); // this is @orange
 	z-index: 100;
 	padding: 1em;
 	input {
@@ -89,11 +90,8 @@ table {
 .MapPage {
 	.no-select;
 	#mapContainer {
-
 		position: relative;
-
 		background-color: #fff;
-		max-width: 1400;
 
 		#mapWrap {
 			width: 100%;
@@ -102,6 +100,7 @@ table {
 			z-index: 5;
 
 			#mapOrange {
+				.no-select;
 				display: block;
 				margin: auto;
 				background-size: contain;
@@ -109,7 +108,9 @@ table {
 				background-position: center top;
 				background-image: 
 					url('/static/img/map_with_header.png');
+
 				#mapGray {
+					.no-select;
 					background-image: 
 						url('/static/img/map_with_header_grey.png');
 					background-size: contain;
@@ -117,14 +118,10 @@ table {
 					background-position: center top;
 				}
 			}
-
+			#blank {
+				.no-select;
+			}
 		}
-
-		img#blank {
-			width: 1500px;
-			height: 990px;
-		}
-
 		img.marker {
 			position: absolute;
 			top: 0;

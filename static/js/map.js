@@ -35,11 +35,34 @@ var Map = Backbone.Model.extend({
 		this.set('curWidth', width);
 		this.set('curHeight', height);
 	},
+	toMapCoords: function(x, y) {
+		var srcWidth = this.get('srcWidth'),
+			srcHeight = this.get('srcHeight'),
+			curWidth = this.get('curWidth'),
+			curHeight = this.get('curHeight');
+
+		return {
+			x: x * srcWidth / curWidth,
+			y: y * srcHeight / curHeight,
+		}
+	},
+	toDisplayCoords: function(width, height) {
+		var srcWidth = this.get('srcWidth'),
+			srcHeight = this.get('srcHeight'),
+			curWidth = this.get('curWidth'),
+			curHeight = this.get('curHeight');
+
+		return {
+			x: x * curWidth / srcWidth,
+			y: y * curHeight / srcHeight,
+		}
+	},
 });
 
 
 var MapView = Backbone.View.extend({
 	model: null,
+	userMarker: null,
 	events: {
 		click: 'click',
 	},
@@ -48,9 +71,9 @@ var MapView = Backbone.View.extend({
 		var that = this;
 
 		this.model = args.model;
-		/*this.$el = $('img#map');
+		this.$el = $('#mapOrange');
 		
-		this.copySize();
+		/*this.copySize();
 
 		this.$el.on('dragstart', function(ev) {
 			ev.preventDefault();
@@ -75,8 +98,65 @@ var MapView = Backbone.View.extend({
 			that.resize();
 		});
 
-		//this.delegateEvents(); // TODO TODO UNCOMMENT
+		this.delegateEvents();
 	},
+	setColor: function(color) {
+		var opacityStart = 0,
+			opacityEnd = 1;
+		if('orange' == color) {
+			opacityStart = 1;
+			opacityEnd = 0;
+		}
+		$('#mapGray')
+			.stop()
+			.css('opacity', opacityStart)
+			.animate({opacity: opacityEnd}, 400);
+	},
+	modeSwitched: function() {
+		var curMode = window.livemap.get('mode');
+		if(curMode == 'exhibit') {
+			this.setColor('orange');
+		}
+		else {
+			this.setColor('gray');
+		}
+	},
+	click: function(ev) {
+		var curMode = window.livemap.get('mode'),
+			off = this.$el.offset(),
+			x = ev.pageX - off.left,
+			y = ev.pageY - off.top,
+			coords = null,
+			marker = null;
+
+		coords = this.model.toMapCoords(x, y);
+
+		console.log(coords);
+		console.log(coords.x, coords.y);
+		if(!this.userMarker) {
+			this.userMarker = new Marker({
+				position: {
+					x: coords.x,
+					y: coords.y,
+				},
+			});
+		}
+
+		if(curMode == 'exhibit') {
+			window.livemap.set('mode', 'entry');
+		}
+		else {
+			this.userMarker.move(coords.x, coords.y);
+		}
+			
+		/*
+		marker = new Marker({
+			position: {x: xx, y: yy}
+		});
+		window.livemap.markers.push(marker);
+		marker.save(); // TODO: Actual backbone*/
+	},
+
 	resize: function() {
 		var ww = $(window).width(),
 			wh = $(window).height(),
@@ -126,67 +206,10 @@ var MapView = Backbone.View.extend({
 			height: nh,
 		});
 		
-		/* TODO UNCOMMENT
-		this.copySize();
-		window.livemap.markers.each(function(m) {
-			m.view.render();
-		});*/
-	},
-	copySize: function() {
-		/*this.model.set({
-			curWidth: this.$el.innerWidth(),
-			curHeight: this.$el.innerHeight(),
-		});*/
-	},
-	click: function(ev) {
-		/*var off = this.$el.offset(),
-			srcWidth = this.model.get('srcWidth'),
-			srcHeight = this.model.get('srcHeight'),
-			x = ev.pageX - off.left,
-			y = ev.pageY - off.top,
-			xx = 0,
-			yy = 0, 
-			marker = null;
-		
-		// If the browser stretches the images, we need to calculate
-		// the image scaling so we can remap the click points to the
-		// true image coordinates
-		xx = x * srcWidth / this.$el.innerWidth();
-		yy = y * srcHeight / this.$el.innerHeight();
-
-		marker = new Marker({
-			position: {x: xx, y: yy}
+		this.model.set({
+			curWidth: nw,
+			curHeight: nh,
 		});
-		window.livemap.markers.push(marker);
-		marker.save(); // TODO: Actual backbone*/
-	},
-	modeSwitched: function() {
-		var curMode = window.livemap.get('mode');
-		console.log('MAP: Mode was switched!');
-		if(curMode == 'exhibit') {
-			this.switchedToExhibit();
-		}
-		else {
-			this.switchedToEntry();
-		}
-	},
-	switchedToExhibit: function() {
-		this.setColor('orange');
-	},
-	switchedToEntry: function() {
-		this.setColor('gray');
-	},
-	setColor: function(color) {
-		var opacityStart = 0,
-			opacityEnd = 1;
-		if('orange' == color) {
-			opacityStart = 1;
-			opacityEnd = 0;
-		}
-		$('#mapGray')
-			.stop()
-			.css('opacity', opacityStart)
-			.animate({opacity: opacityEnd}, 400);
 	},
 });
 
