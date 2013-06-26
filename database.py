@@ -3,7 +3,7 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import scoped_session, sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
 
-SQLITE_DB_FILE = 'database.sqlite'
+SQLITE_DB_FILE = '_database.sqlite'
 
 Base = declarative_base()
 database = None

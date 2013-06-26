@@ -146,7 +146,9 @@ var MapView = Backbone.View.extend({
 					x: coords.x,
 					y: coords.y,
 				},
+				fromServer: false,
 			});
+			window.userMarker.addView();
 		}
 
 		if(curMode == 'exhibit') {

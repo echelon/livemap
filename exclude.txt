@@ -22,3 +22,7 @@ README.md
 static/
 img/ASSET_ORIGINAL
 static/img/ASSET_ORIGINAL
+
+# Databases
+database.sqlite
+_database.sqlite

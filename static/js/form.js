@@ -14,6 +14,7 @@ var FormView = Backbone.View.extend({
 		this.$el.find('#close').on('click', function() { 
 			// TODO: MOVE OUT TO A HIGHER-VIZ MODE SWITCH
 			// TODO: MOVE OUT TO A HIGHER-VIZ MODE SWITCH
+			that.close();
 			window.livemap.switchToExhibit();
 		});
 
@@ -99,6 +100,10 @@ var FormView = Backbone.View.extend({
 	},
 	close: function() {
 		var that = this;
+		if(window.userMarker) {
+			window.userMarker.removeView();
+			window.userMarker = null;
+		}
 		this.hide()
 			.promise()
 			.done(function() {
@@ -164,6 +169,7 @@ var FormView = Backbone.View.extend({
 			contentType : 'application/json',
 			dataType: 'html',
 			success: function(data, textStatus, xhr) {
+				window.userMarker.removeView();
 				window.livemap.markers.push(window.userMarker);
 				window.userMarker = null;
 				that.$el.find('form').hide();
