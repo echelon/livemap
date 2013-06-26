@@ -142,13 +142,14 @@ var FormView = Backbone.View.extend({
 	submitForm: function(ev) {
 		var that = this,
 			url = '/api/locations',
+			pos = window.userMarker.get('position'),
 			data = { 
 				name: this.getInput('#inputName'),
 				email: this.getInput('#inputEmail'),
 				phone: this.getInput('#inputPhone'),
 				school: this.getInput('#inputSchool'),
-				position_x: 0,
-				position_y: 0,
+				position_x: pos.x,
+				position_y: pos.y,
 			};
 
 		ev.preventDefault();
@@ -162,21 +163,23 @@ var FormView = Backbone.View.extend({
 			type: 'POST',
 			contentType : 'application/json',
 			dataType: 'html',
-			success: function(data, textStatus, xhr) {},
+			success: function(data, textStatus, xhr) {
+				window.livemap.markers.push(window.userMarker);
+				window.userMarker = null;
+				that.$el.find('form').hide();
+				that.$el.find('#formThanks')
+					.fadeIn()
+					.promise()
+					.done(function() {
+						setTimeout(function() {
+							window.livemap.switchToExhibit();
+							that.$el.find('#formThanks').stop().hide();
+							that.$el.find('form').stop().fadeIn();
+						}, 1000);
+					});
+			},
 			error: function(xhr, textStatus, errorThrown) {},
 		});
-
-		this.$el.find('form').hide();
-		this.$el.find('#formThanks')
-			.fadeIn()
-			.promise()
-			.done(function() {
-				setTimeout(function() {
-					window.livemap.switchToExhibit();
-					that.$el.find('#formThanks').stop().hide();
-					that.$el.find('form').stop().fadeIn();
-				}, 1000);
-			});
 
 		return false;
 	},

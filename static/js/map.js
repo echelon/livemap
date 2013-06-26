@@ -26,8 +26,6 @@ var Map = Backbone.Model.extend({
 				srcHeight: this.height,
 				srcSet: true,
 			});
-			console.log('Image dimensions:', 
-					this.width, this.height);
 		}
 		img.src = IMG_MAP;
 	},
@@ -62,7 +60,6 @@ var Map = Backbone.Model.extend({
 
 var MapView = Backbone.View.extend({
 	model: null,
-	userMarker: null,
 	events: {
 		click: 'click',
 	},
@@ -72,16 +69,7 @@ var MapView = Backbone.View.extend({
 
 		this.model = args.model;
 		this.$el = $('#mapOrange');
-		
-		/*this.copySize();
-
-		this.$el.on('dragstart', function(ev) {
-			ev.preventDefault();
-			return false;
-		});
-
-		this.fitFold();*/
-
+	
 		if(this.model.get('srcSet')) {
 			this.resize();
 		}
@@ -151,11 +139,9 @@ var MapView = Backbone.View.extend({
 				quadr = 2;
 			}
 		}
-		console.log('Should be placed in quad', quadr);
 
-		console.log(x, y, midX, midY);
-		if(!this.userMarker) {
-			this.userMarker = new Marker({
+		if(!window.userMarker) {
+			window.userMarker = new Marker({
 				position: {
 					x: coords.x,
 					y: coords.y,
@@ -168,15 +154,8 @@ var MapView = Backbone.View.extend({
 			window.livemap.set('mode', 'entry');
 		}
 		else {
-			this.userMarker.move(coords.x, coords.y);
+			window.userMarker.move(coords.x, coords.y);
 		}
-			
-		/*
-		marker = new Marker({
-			position: {x: xx, y: yy}
-		});
-		window.livemap.markers.push(marker);
-		marker.save(); // TODO: Actual backbone*/
 	},
 
 	resize: function() {
