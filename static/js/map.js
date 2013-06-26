@@ -126,13 +126,34 @@ var MapView = Backbone.View.extend({
 			off = this.$el.offset(),
 			x = ev.pageX - off.left,
 			y = ev.pageY - off.top,
+			midX = this.model.get('srcWidth') / 2,
+			midY = this.model.get('srcHeight') / 2,
+			quadr = 1,
 			coords = null,
 			marker = null;
 
 		coords = this.model.toMapCoords(x, y);
 
-		console.log(coords);
-		console.log(coords.x, coords.y);
+		// Convenient/initial display quadrant
+		if(coords.x > midX) {
+			if(coords.y > midY) {
+				quadr = 4;
+			}
+			else {
+				quadr = 3;
+			}
+		}
+		else {
+			if(coords.y > midY) {
+				quadr = 1;
+			}
+			else {
+				quadr = 2;
+			}
+		}
+		console.log('Should be placed in quad', quadr);
+
+		console.log(x, y, midX, midY);
 		if(!this.userMarker) {
 			this.userMarker = new Marker({
 				position: {
@@ -143,6 +164,7 @@ var MapView = Backbone.View.extend({
 		}
 
 		if(curMode == 'exhibit') {
+			window.form.view.moveToQuadrant(quadr);
 			window.livemap.set('mode', 'entry');
 		}
 		else {

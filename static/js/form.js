@@ -80,6 +80,25 @@ var FormView = Backbone.View.extend({
 
 		this.delegateEvents();
 	},
+	moveToQuadrant: function(quadrant) {
+		var x = '2.0em',
+			y = '2.0em';
+		switch(quadrant) {
+			case 2:
+				this.$el.css({ top: '', right: x, left: '', bottom: y});
+				break;
+			case 3:
+				this.$el.css({ top: '', right: '', left: x, bottom: y});
+				break;
+			case 4:
+				this.$el.css({ top: y, right: '', left: x, bottom: ''});
+				break;
+			case 1:
+			default:
+				this.$el.css({ top: y, right: x, left: '', bottom: ''});
+				break;
+		}
+	},
 	show: function() {
 		this.$el.stop().fadeIn();
 	},
