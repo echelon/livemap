@@ -11,9 +11,40 @@ var Form = Backbone.Model.extend({
 	constructor: function() {
 		this.view = new FormView({model: this});
 	},
+	upload: function(callback, errback) {
+		var pos = this.get('position'),
+			data = { 
+				name: this.get('name'),
+				email: this.get('email'),
+				phone: this.get('phone'),
+				school: this.get('position'),
+				position: {
+					x: pos.x,
+					y: pos.y,
+				},
+			};
+
+		console.log('data', data);
+
+		$.ajax({
+			url: url,
+			data: JSON.stringify(data),
+			type: 'POST',
+			contentType : 'application/json',
+			dataType: 'html',
+			success: function(data, textStatus, xhr) {
+				console.log('POST success');
+			},
+			error: function(xhr, textStatus, errorThrown) {
+				console.log('POST error');
+			},
+		});
+		return false;
+	},
 });
 
 var FormView = Backbone.View.extend({
+	model: null,
 	events: {
 		'keypress input': 'supressEnter',
 	},
@@ -78,6 +109,8 @@ var FormView = Backbone.View.extend({
 				}
 			});
 
+		//this.listenTo(this.model, 'clear', this.resetForm);
+
 		this.delegateEvents();
 	},
 	moveToQuadrant: function(quadrant) {
@@ -100,10 +133,22 @@ var FormView = Backbone.View.extend({
 		}
 	},
 	show: function() {
-		this.$el.stop().fadeIn();
+		return this.$el.stop().fadeIn();
 	},
 	hide: function() {
-		this.$el.stop().fadeOut();
+		return this.$el.stop().fadeOut();
+	},
+	open: function() {
+		this.resetForm();
+		this.show();
+	},
+	close: function() {
+		var that = this;
+		this.hide()
+			.promise()
+			.done(function() {
+				that.resetForm();
+			});
 	},
 	// Turn <enter> into <tab> per Travis' request
 	supressEnter: function(ev) {
@@ -126,6 +171,11 @@ var FormView = Backbone.View.extend({
 		catch(e) {
 		}
 		return false;
+	},
+	resetForm: function() {
+		this.$el.find('input').each(function() {
+			$(this).val($(this).data('default'));
+		});
 	},
 });
 
