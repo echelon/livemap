@@ -78,16 +78,13 @@ def page_location_add():
 @app.route('/api/locations', methods=['GET', 'POST'])
 def page_location_list():
 	if request.method == 'POST':
-		if request.json.keys():
-			pos = request.json['position']
-
 		location = Location(
-			position_x = pos['x'],
-			position_y = pos['y'],
-			#name = requested('name', 'BillyBob'),
-			#email = request.form['email'],
-			#phone = request.form['phone'],
-			#school = request.form['school'],
+			position_x = request.json['position_x'],
+			position_y = request.json['position_y'],
+			name = request.json['name'],
+			email = request.json['email'],
+			phone = request.json['phone'],
+			school = request.json['school'],
 		)
 
 		database.session.add(location)

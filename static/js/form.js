@@ -1,18 +1,21 @@
 
 var Form = Backbone.Model.extend({
+	url: '/api/locations',
 	view: null,
 	defaults: {
-		name: '',
+		name: 'BILLY BOB',
 		email: '',
 		phone: '',
 		school: '',
-		position: null,
+		position_x: '',
+		position_y: '',
 	},
 	constructor: function() {
 		this.view = new FormView({model: this});
+		this.view.model = this;
 	},
 	upload: function(callback, errback) {
-		var pos = this.get('position'),
+		/*var pos = this.get('position'),
 			data = { 
 				name: this.get('name'),
 				email: this.get('email'),
@@ -38,7 +41,7 @@ var Form = Backbone.Model.extend({
 			error: function(xhr, textStatus, errorThrown) {
 				console.log('POST error');
 			},
-		});
+		});*/
 		return false;
 	},
 });
@@ -47,6 +50,7 @@ var FormView = Backbone.View.extend({
 	model: null,
 	events: {
 		'keypress input': 'supressEnter',
+		//'submit': 'submit',
 	},
 	constructor: function() {
 		var that = this;
@@ -110,6 +114,10 @@ var FormView = Backbone.View.extend({
 			});
 
 		//this.listenTo(this.model, 'clear', this.resetForm);
+		//
+		this.$el.on('submit', function(ev) {
+			that.submitForm(ev);
+		});
 
 		this.delegateEvents();
 	},
@@ -152,10 +160,10 @@ var FormView = Backbone.View.extend({
 	},
 	// Turn <enter> into <tab> per Travis' request
 	supressEnter: function(ev) {
-		console.log('test');
 		var els = null,
 			i = 0,
 			j = 0;
+		console.log('supressEnter');
 		if(ev.keyCode != 13) {
 			return true;
 		}
@@ -177,8 +185,73 @@ var FormView = Backbone.View.extend({
 			$(this).val($(this).data('default'));
 		});
 	},
-});
+	submitForm: function(ev) {
+		var url = '/api/locations',
+			data = { 
+				name: this.$el.find('input#inputName').val(),
+				email: this.$el.find('input#inputEmail').val(),
+				phone: this.$el.find('input#inputPhone').val(),
+				school: this.$el.find('input#inputSchool').val(),
+				position_x: 0,
+				position_y: 0,
+				/*position: {
+					//x: pos.x,
+					//y: pos.y,
+					x: 0,
+					y: 0,
+				},*/
+			};
 
-var FormController = Backbone.View.extend({
+		console.log('data', data);
+
+		ev.preventDefault();
+
+		// To my dismay, backbone has been uncooperative with this.
+		// It's 3AM, so I'm going to fall back to jQuery for now.
+		// The 'model' is kind of pointless here anyway.
+		$.ajax({
+			url: url,
+			data: JSON.stringify(data),
+			type: 'POST',
+			contentType : 'application/json',
+			dataType: 'html',
+			success: function(data, textStatus, xhr) {
+				console.log('POST success');
+			},
+			error: function(xhr, textStatus, errorThrown) {
+				console.log('POST error');
+			},
+		});
+
+		/*var form = new Form({
+			name: this.$el.find('input#inputName').val(),
+			email: this.$el.find('input#inputEmail').val(),
+			phone: this.$el.find('input#inputPhone').val(),
+			school: this.$el.find('input#inputSchool').val(),
+			position_x: 0,
+			position_y: 0,
+		});
+		form.save();
+		/*var pos = 0;
+		ev.preventDefault();
+		console.log('clearing...');
+		this.model.clear();
+		console.log('cleared');
+		console.log(window.form);
+		window.form.set({
+			foo: 'adasdf',
+			//name: this.$el.find('input#inputName').val(),
+			/*'email': this.$el.find('input#inputEmail').val(),
+			'phone': this.$el.find('input#inputPhone').val(),
+			'school': this.$el.find('input#inputSchool').val(),
+			'position_x': 0,
+			'position_y': 0,*/
+		//});*/
+		console.log('saving2...');
+		//this.model.save();
+		console.log('saving3...');
+		window.livemap.switchToExhibit();
+		return false;
+	},
 });
 
