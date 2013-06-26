@@ -1,51 +1,4 @@
 
-var Form = Backbone.Model.extend({
-	url: '/api/locations',
-	view: null,
-	defaults: {
-		name: 'BILLY BOB',
-		email: '',
-		phone: '',
-		school: '',
-		position_x: '',
-		position_y: '',
-	},
-	constructor: function() {
-		this.view = new FormView({model: this});
-		this.view.model = this;
-	},
-	upload: function(callback, errback) {
-		/*var pos = this.get('position'),
-			data = { 
-				name: this.get('name'),
-				email: this.get('email'),
-				phone: this.get('phone'),
-				school: this.get('position'),
-				position: {
-					x: pos.x,
-					y: pos.y,
-				},
-			};
-
-		console.log('data', data);
-
-		$.ajax({
-			url: url,
-			data: JSON.stringify(data),
-			type: 'POST',
-			contentType : 'application/json',
-			dataType: 'html',
-			success: function(data, textStatus, xhr) {
-				console.log('POST success');
-			},
-			error: function(xhr, textStatus, errorThrown) {
-				console.log('POST error');
-			},
-		});*/
-		return false;
-	},
-});
-
 var FormView = Backbone.View.extend({
 	model: null,
 	events: {
@@ -90,16 +43,11 @@ var FormView = Backbone.View.extend({
 			that.$el.removeClass('dragging');
 		});
 
-		// Form labels
+		// Form default text labels
 		this.$el.find('input').each(function() {
 			$(this).attr('value', $(this).data('default'));
 		});
 		
-		// Form Scripting
-		this.$el.find('input').on('change', function() {
-			console.log('change');
-		});
-
 		// Focus events
 		this.$el.find('input')
 			.on('focusin', function() {
@@ -113,8 +61,7 @@ var FormView = Backbone.View.extend({
 				}
 			});
 
-		//this.listenTo(this.model, 'clear', this.resetForm);
-		//
+		// Form submit
 		this.$el.on('submit', function(ev) {
 			that.submitForm(ev);
 		});
@@ -163,7 +110,6 @@ var FormView = Backbone.View.extend({
 		var els = null,
 			i = 0,
 			j = 0;
-		console.log('supressEnter');
 		if(ev.keyCode != 13) {
 			return true;
 		}
@@ -180,29 +126,30 @@ var FormView = Backbone.View.extend({
 		}
 		return false;
 	},
+	getInput: function(id) {
+		var $in = this.$el.find(id),
+			val = $in.val();
+		if(val == $in.data('default')) {
+			return '';
+		}
+		return val;
+	},
 	resetForm: function() {
 		this.$el.find('input').each(function() {
 			$(this).val($(this).data('default'));
 		});
 	},
 	submitForm: function(ev) {
-		var url = '/api/locations',
+		var that = this,
+			url = '/api/locations',
 			data = { 
-				name: this.$el.find('input#inputName').val(),
-				email: this.$el.find('input#inputEmail').val(),
-				phone: this.$el.find('input#inputPhone').val(),
-				school: this.$el.find('input#inputSchool').val(),
+				name: this.getInput('#inputName'),
+				email: this.getInput('#inputEmail'),
+				phone: this.getInput('#inputPhone'),
+				school: this.getInput('#inputSchool'),
 				position_x: 0,
 				position_y: 0,
-				/*position: {
-					//x: pos.x,
-					//y: pos.y,
-					x: 0,
-					y: 0,
-				},*/
 			};
-
-		console.log('data', data);
 
 		ev.preventDefault();
 
@@ -215,42 +162,22 @@ var FormView = Backbone.View.extend({
 			type: 'POST',
 			contentType : 'application/json',
 			dataType: 'html',
-			success: function(data, textStatus, xhr) {
-				console.log('POST success');
-			},
-			error: function(xhr, textStatus, errorThrown) {
-				console.log('POST error');
-			},
+			success: function(data, textStatus, xhr) {},
+			error: function(xhr, textStatus, errorThrown) {},
 		});
 
-		/*var form = new Form({
-			name: this.$el.find('input#inputName').val(),
-			email: this.$el.find('input#inputEmail').val(),
-			phone: this.$el.find('input#inputPhone').val(),
-			school: this.$el.find('input#inputSchool').val(),
-			position_x: 0,
-			position_y: 0,
-		});
-		form.save();
-		/*var pos = 0;
-		ev.preventDefault();
-		console.log('clearing...');
-		this.model.clear();
-		console.log('cleared');
-		console.log(window.form);
-		window.form.set({
-			foo: 'adasdf',
-			//name: this.$el.find('input#inputName').val(),
-			/*'email': this.$el.find('input#inputEmail').val(),
-			'phone': this.$el.find('input#inputPhone').val(),
-			'school': this.$el.find('input#inputSchool').val(),
-			'position_x': 0,
-			'position_y': 0,*/
-		//});*/
-		console.log('saving2...');
-		//this.model.save();
-		console.log('saving3...');
-		window.livemap.switchToExhibit();
+		this.$el.find('form').hide();
+		this.$el.find('#formThanks')
+			.fadeIn()
+			.promise()
+			.done(function() {
+				setTimeout(function() {
+					window.livemap.switchToExhibit();
+					that.$el.find('#formThanks').stop().hide();
+					that.$el.find('form').stop().fadeIn();
+				}, 1000);
+			});
+
 		return false;
 	},
 });

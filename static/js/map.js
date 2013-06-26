@@ -164,7 +164,7 @@ var MapView = Backbone.View.extend({
 		}
 
 		if(curMode == 'exhibit') {
-			window.form.view.moveToQuadrant(quadr);
+			window.formView.moveToQuadrant(quadr);
 			window.livemap.set('mode', 'entry');
 		}
 		else {
