@@ -33,7 +33,13 @@ var FormView = Backbone.View.extend({
 				if(!that.$el.hasClass('dragging')){
 					return;
 				}
-				that.$el.offset({
+				that.$el.css({
+					top: '',
+					left: '',
+					right: '',
+					bottom: '',
+				})
+				.offset({
 					top: ev.pageY - h,
 					left: ev.pageX - w,
 				});
