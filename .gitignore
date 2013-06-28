@@ -3,3 +3,5 @@
 /output
 database.sqlite
 _database.sqlite
+config.py
+configs.py

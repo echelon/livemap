@@ -3,6 +3,14 @@
 {% block title %}Locaton List{% endblock %}
 
 {% block extraBody %}
+  <script type="text/javascript"
+    src="/static/js/admin.js{{ cache_buster() }}"></script>
+  <script type="text/javascript">
+    $(function() {
+        install_admin();
+    });
+  </script>
+
 {% endblock %}
 
 {% block body %}
@@ -19,15 +27,16 @@
       <th>Phone</th>
       <th colspan="2">Manage</th>
   {% for loc in locations %}
-    <tr>
+  <tr id="row{{ loc.id }}">
       <td>{{ loc.id }}</td>
       <td>{{ loc.position_x }}, {{ loc.position_y }}</td>
       <td>{{ loc.name }}</td>
       <td>{{ loc.school }}</td>
       <td>{{ loc.email }}</td>
       <td>{{ loc.phone }}</td>
-      <td><a href="#">edit</a></td>
-      <td><a href="#">delete</a></td>
+      <td><a href="#" class="edit" data-id="{{loc.id}}">edit</a></td>
+      <td><a href="#" class="delete"
+             data-id="{{loc.id}}">delete</a></td>
     </tr>
   {% endfor %}
   </table>
