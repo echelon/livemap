@@ -45,11 +45,11 @@ def requested(name, default=''):
 # -------------
 
 @app.route('/')
-def page_index():
+def index():
 	return render_template('map.html')
 
 @app.route('/locations', methods=['GET', 'POST'])
-def page_location_add():
+def locations():
 	location = None
 	if request.form and len(request.form):
 
@@ -107,7 +107,7 @@ def page_location_list():
 
 @app.errorhandler(404)
 @app.route('/404')
-def page_404(e=None):
+def error_404(e=None):
 	if e:
 		return render_template('404.html'), 404
 	return render_template('404.html')

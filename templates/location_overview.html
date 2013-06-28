@@ -17,6 +17,7 @@
       <th>School</th>
       <th>Email</th>
       <th>Phone</th>
+      <th colspan="2">Manage</th>
   {% for loc in locations %}
     <tr>
       <td>{{ loc.id }}</td>
@@ -25,41 +26,11 @@
       <td>{{ loc.school }}</td>
       <td>{{ loc.email }}</td>
       <td>{{ loc.phone }}</td>
+      <td><a href="#">edit</a></td>
+      <td><a href="#">delete</a></td>
     </tr>
   {% endfor %}
   </table>
-
-  <h1>Location Entry</h1>
-
-  <form method="post">
-    <table>
-      <tr>
-        <td>position_x</td>
-        <td><input name="position_x"></td>
-      </tr>
-      <tr>
-        <td>position_y</td>
-        <td><input name="position_y"></td>
-      </tr>
-      <tr>
-        <td>name</td>
-        <td><input name="name"></td>
-      </tr>
-      <tr>
-        <td>email</td>
-        <td><input name="email"></td>
-      </tr>
-      <tr>
-        <td>phone</td>
-        <td><input name="phone"></td>
-      </tr>
-      <tr>
-        <td>shcool</td>
-        <td><input name="school"></td>
-      </tr>
-    </table>
-    <p><input type="submit" value="Add Location"></p>
-  </form>
 </div>
 {% endblock body %}
 
