@@ -1,6 +1,16 @@
 {% extends "BASE.html" %}
 {% set pageName = 'MapPage' %}
+{% set pageClass = '' %}
 {% block title %}Tour Map{% endblock %}
+
+{% block extraHead %}
+  <style type="text/css">
+    html {
+      overflow: hidden;
+    }
+  </style>
+{% endblock extraHead %}
+
 
 {% block extraBody %}
   <script type="text/javascript"

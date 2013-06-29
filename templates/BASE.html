@@ -29,8 +29,8 @@
     {% block extraHead %}{% endblock %}
 
   </head>
-  <body class="{{ pageName }}">
-    <div id="main" class="{{ pageName }}">
+  <body class="{{ pageName }} {{ pageClass }}">
+    <div id="main" class="{{ pageName }} {{ pageClass }}">
 
       {% block body %}
         <!-- Body content -->
