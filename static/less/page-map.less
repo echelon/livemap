@@ -1,0 +1,87 @@
+.MapPage {
+	.no-select;
+
+	#formContainer {
+		.no-select;
+		display: none;
+		position: absolute;
+		font-size: 0.8em;
+		width: 350px;
+		background-color: rgba(243, 156, 18, 0.7); // this is @orange
+		//background-color: rgba(230, 126, 34, 0.5); // this is @carrot
+		border: 1px solid rgb(243, 156, 18); // this is @orange
+		z-index: 100;
+		padding: 1em;
+		#grabHandle img {
+			display: block;
+			margin: auto;
+		}
+		input {
+			border: 1px solid @clouds;
+			background-color: rgba(255, 255, 255, 0.8);
+			display: block;
+			width: 75%;
+			margin: 0.5em auto;
+			padding: 0.5em;
+		}
+		button#close {
+			float: right;
+		}
+		button {
+			display: block;
+			background-color: @clouds;
+			border: 0;
+			padding: 0.5em;
+			margin: auto;
+		}
+		#formThanks {
+			display: none;
+		}
+	}
+
+	.dragging {
+		background-color: 
+			rgba(0, 0, 0, 0.2) !important;
+	}
+
+	#mapContainer {
+		position: relative;
+		background-color: #fff;
+
+		#mapWrap {
+			width: 100%;
+			position: absolute;
+			top: 0;
+			z-index: 5;
+
+			#mapOrange {
+				.no-select;
+				display: block;
+				margin: auto;
+				background-size: contain;
+				background-repeat: no-repeat;
+				background-position: center top;
+				background-image: 
+					url('/static/img/map_with_header.png');
+
+				#mapGray {
+					.no-select;
+					background-image: 
+						url('/static/img/map_with_header_grey.png');
+					background-size: contain;
+					background-repeat: no-repeat;
+					background-position: center top;
+				}
+			}
+			#blank {
+				.no-select;
+			}
+		}
+		img.marker {
+			position: absolute;
+			top: 0;
+			left: 0;
+		}
+	}
+}
+
