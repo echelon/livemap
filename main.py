@@ -163,7 +163,7 @@ def error_404(e=None):
 
 @login_manager.unauthorized_handler
 def unauthorized():
-    return 'login, silly'
+    return redirect('/login')
 
 @login_manager.user_loader
 def load_user(userid):
