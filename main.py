@@ -7,8 +7,12 @@ Copyright 2013 Brandon Thomas <bt@brand.io>
 
 import os
 import sys
+import random
 import getpass
 import hashlib
+import datetime
+import dateutil
+import dateutil.parser
 from flask import Flask, render_template, url_for, request
 from flask import send_from_directory, send_file, redirect
 from flask import json, jsonify
@@ -158,6 +162,9 @@ def page_location_list():
 		except:
 			pass
 
+		if not len(locations):
+			return '{}'
+
 		return json.dumps([x.serialize() for x in locations])
 
 # --------------
@@ -194,12 +201,19 @@ class User(UserMixin):
 # -----------------
 
 def cache_buster():
-	import random
 	if not app.config['ENVIRONMENT_DEV']:
 		return ''
 	return '?%s' % str(random.randint(500, 9000000))
 
+def format_datetime(dateStr, fmt=None):
+	dateStr = str(dateStr) # FIXME: Already a date object?
+	date = dateutil.parser.parse(dateStr)
+	if not fmt:
+		fmt = '%b %d, %H:%M'
+	return date.strftime(fmt)
+
 app.jinja_env.globals.update(cache_buster=cache_buster)
+app.jinja_env.filters['datetime'] = format_datetime
 
 def main(port=5000):
 	app.run(

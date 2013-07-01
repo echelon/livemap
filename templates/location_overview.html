@@ -16,11 +16,12 @@
 
 {% block body %}
 
-<div id="tableWrap">
+<div id="otherPageWrap">
   <h1>Location List</h1>
   <table>
     <tr>
       <th>ID</th>
+      <th>Date</th>
       <th>Coordinate</th>
       <th>Name</th>
       <th>School</th>
@@ -30,6 +31,7 @@
   {% for loc in locations %}
   <tr id="row{{ loc.id }}">
       <td>{{ loc.id }}</td>
+      <td>{{ loc.datetime_added | datetime }}</td>
       <td>{{ loc.position_x }}, {{ loc.position_y }}</td>
       <td>{{ loc.name }}</td>
       <td>{{ loc.school }}</td>

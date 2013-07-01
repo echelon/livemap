@@ -1,17 +1,26 @@
 {% extends "BASE.html" %}
 {% set pageName = 'LoginPage' %}
+{% set pageClass = 'OtherPage' %}
 {% block title %}Login to Awesome{% endblock %}
 
 {% block extraBody %}
 {% endblock %}
 
 {% block body %}
-<form action="" method="POST">
-  <label>Username</label> 
-  <input name="user">
-  <label>Password</label> 
-  <input name="pass" type="password">
-  <button>Submit it</button>
-</form>
+<div id="otherPageWrap">
+  <div id="loginWrap">
+    <form action="" method="POST">
+      <div class="row">
+        <input name="user">
+        <label>Username</label> 
+      </div>
+      <div class="row">
+        <input name="pass" type="password">
+        <label>Password</label> 
+      </div>
+      <button>Go, go, go!</button>
+    </form>
+  </div>
+</div>
 {% endblock body %}
 

@@ -11,7 +11,7 @@
 		background-color: rgba(243, 156, 18, 0.7); // this is @orange
 		//background-color: rgba(230, 126, 34, 0.5); // this is @carrot
 		//border: 1px solid rgb(243, 156, 18); // this is @orange
-		padding: 0em 0em 1em;
+		padding: 0; // Nikola didn't want padding...
 		button#close {
 			z-index: 150;
 			float: right;
@@ -100,6 +100,7 @@
 
 			// The markers!
 			img.marker {
+				pointer-events: none;
 				position: absolute;
 				width: 16px;
 				height: 23px;

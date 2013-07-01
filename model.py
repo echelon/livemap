@@ -20,10 +20,8 @@ class Location(Base):
 	__tablename__ = 'locations'
 	id = Column(Integer, primary_key=True)
 
-	"""
 	datetime_added = Column(DateTime, nullable=True,
 					default=datetime.datetime.now)
-	"""
 
 	position_x = Column(Float(255))
 	position_y = Column(Float(255))
