@@ -9,9 +9,9 @@ var FormView = Backbone.View.extend({
 		var that = this;
 		
 		this.$el = $('#formContainer');
-		this.$grab = this.$el.find('#grabHandle');
+		this.$grab = this.$el.find('#grabHandle img');
 
-		this.$el.find('#close').on('click', function() { 
+		this.$el.find('button#close').on('click', function() { 
 			// TODO: MOVE OUT TO A HIGHER-VIZ MODE SWITCH
 			// TODO: MOVE OUT TO A HIGHER-VIZ MODE SWITCH
 			that.close();

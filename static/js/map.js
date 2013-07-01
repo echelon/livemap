@@ -168,14 +168,12 @@ var MapView = Backbone.View.extend({
 			ratio = 0;
 
 		if(imgWidth > maxWidth) {
-			console.log('too wide');
 			ratio = maxWidth / imgWidth;
 			imgWidth = maxWidth;
 			imgHeight *= ratio;
 		}
 
 		if(imgHeight > maxHeight) {
-			console.log('too tall');
 			ratio = maxHeight / imgHeight;
 			imgHeight = maxHeight;
 			imgWidth *= ratio;

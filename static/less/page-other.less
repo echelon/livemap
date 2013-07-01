@@ -1,19 +1,31 @@
 .OtherPage {
 
-	table {
-		width: 100%;
-		border: 1px solid #aaa;
-		td, th {
-			border: 1px solid #aaa;
-			padding: 0.3em;
-		}
-		th {
-			font-weight: bold;
-		}
-	}
-
-	.tableWrap {
-		max-width: 500px;
+	#tableWrap {
+		min-width: 500px;
+		max-width: 1200px;
+		width: 95%;
 		margin: auto;
+		overflow-x: auto;
+
+		table {
+			border: 3px solid black;
+			width: 100% !important;
+			//border: 1px solid #aaa;
+			td, th {
+				border: 1px solid #aaa;
+				padding: 0.3em;
+				overflow: hidden;
+				text-overflow: ellipsis;
+			}
+			th {
+				font-weight: bold;
+			}
+			tr:nth-child(2n) {
+				background-color: #fffff5;
+			}
+			tr:nth-child(2n+1) {
+				background-color: #f5ffff;
+			}
+		}
 	}
 }

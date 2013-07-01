@@ -1,6 +1,6 @@
 var IMG_MAP = '/static/img/map_with_header.png';
-var IMG_MARKER = '/static/img/pin_16.png';
-var IMG_MARKER_GRAY = '/static/img/pin_gray_16.png';
+var IMG_MARKER = '/static/img/pin_32.png';
+var IMG_MARKER_GRAY = '/static/img/pin_gray_32.png';
 var IMG_MARKER_WIDTH = 16;
 var IMG_MARKER_HEIGHT = 23;
 
