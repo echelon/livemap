@@ -16,7 +16,7 @@ from flask.ext.login import LoginManager, UserMixin
 from flask.ext.login import login_user, login_required
 
 # XXX: You must create a non-versioned config file defining 
-# the following: SECRET_KEY, USERNAME, PASSHASH.
+# the following: SECRET_KEY, USERS (list of username/passhash dicts)
 import config
 
 import database
@@ -29,8 +29,7 @@ from model import *
 app = Flask(__name__)
 
 app.secret_key = config.SECRET_KEY
-app.config['USER'] = config.USERNAME
-app.config['PASS'] = config.PASSHASH
+app.config['USERS'] = config.USERS
 
 login_manager = LoginManager()
 login_manager.init_app(app)
@@ -64,14 +63,25 @@ def index():
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
+	error = None
 	if request.method == 'POST':
 		user = request.form['user']
 		hsh = hashlib.sha1(request.form['pass']).hexdigest()
-		if user == app.config['USER'] and hsh == app.config['PASS']:
+		authenticated = False
+		error = 'Wrong username/password.'
+
+		for u in app.config['USERS']:
+			if user != u['username']:
+				continue
+			if hsh == u['passhash']:
+				authenticated = True
+				break
+
+		if authenticated:
 			login_user(User(), remember=False)
 			return redirect('/locations')
 
-	return render_template('login.html')
+	return render_template('login.html', error=error)
 
 @app.route('/locations', methods=['GET', 'POST'])
 @login_required

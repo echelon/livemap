@@ -84,7 +84,7 @@ var MarkerView = Backbone.View.extend({
 					.attr('src', IMG_MARKER)
 					.addClass('marker');
 
-		$('#mapWrap').append(this.$el);
+		$('#mapOrange').append(this.$el);
 
 		this.model.on('change', function() {
 			that.render();

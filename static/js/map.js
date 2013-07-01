@@ -161,57 +161,34 @@ var MapView = Backbone.View.extend({
 	},
 
 	resize: function() {
-		var ww = $(window).width(),
-			wh = $(window).height(),
-			iw = this.model.get('srcWidth'),
-			ih = this.model.get('srcHeight'),
-			nw1 = iw,
-			nh1 = ih,
-			nw2 = iw,
-			nh2 = ih,
-			nw = 0,
-			nh = 0;
+		var maxWidth = $(window).width(),
+			maxHeight = $(window).height(),
+			imgWidth = this.model.get('srcWidth'),
+			imgHeight = this.model.get('srcHeight'),
+			ratio = 0;
 
-		// FIXME: Very verbose and possibly incorrect
-		// Must fit the window (entirely above the fold)
-
-		// Maximum size 
-		if(ww > iw) {
-			ww = iw;
-		}
-		if(wh > ih) {
-			wh = ih;
+		if(imgWidth > maxWidth) {
+			console.log('too wide');
+			ratio = maxWidth / imgWidth;
+			imgWidth = maxWidth;
+			imgHeight *= ratio;
 		}
 
-		// Constrain width
-		if(nw1 > ww) {
-			nw1 = ww;
-			nh1 = nw1 / iw * ih;
-		}
-
-		// Constrain height
-		if(nh2 > wh) {
-			nh2 = wh;
-			nw2 = nw2 / iw * ih; 
-		}
-
-		if(nh1 > wh) {
-			nw = nw2;
-			nh = nh2;
-		}
-		else {
-			nw = nw1;
-			nh = nh1;
+		if(imgHeight > maxHeight) {
+			console.log('too tall');
+			ratio = maxHeight / imgHeight;
+			imgHeight = maxHeight;
+			imgWidth *= ratio;
 		}
 
 		$('#blank, #mapOrange, #mapGray').css({
-			width: nw,
-			height: nh,
+			width: imgWidth,
+			height: imgHeight,
 		});
 		
 		this.model.set({
-			curWidth: nw,
-			curHeight: nh,
+			curWidth: imgWidth,
+			curHeight: imgHeight,
 		});
 	},
 });

@@ -32,7 +32,9 @@
 
 {% block body %}
   <div id="formContainer">
-    <button id="close">x</button>
+    <button id="close">
+      <img src="/static/img/x_button_32.png">
+    </button>
     <div id="grabHandle">
       <img src="/static/img/grab_button_150.png">
     </div>
@@ -42,15 +44,17 @@
       <input name="email" id="inputEmail" data-default="email">
       <input name="school" id="inputSchool" data-default="School/District.">
       <input name="phone" id="inputPhone" data-default="Phone#">
-      <button>Submit</button>
+      <button id="submit">
+        <img src="/static/img/submit_button_150.png">
+      </button>
     </form>
     <div id="formThanks">
-      <h1>Thanks!</h1>
-      <h2>Have a great time at ISTE. We'll be in touch!</h2>
+      <h1>Thanks for your interest!</h1>
+      <p>We'll be in touch soon.</p>
     </div>
   </div>
 
-  <div id="mapContainer">
+  <!--<div id="mapContainer">-->
     <div id="mapWrap">
       <div id="mapOrange">
         <div id="mapGray">
@@ -58,5 +62,5 @@
         </div>
       </div>
     </div>
-  </div>
+    <!--</div>-->
 {% endblock body %}

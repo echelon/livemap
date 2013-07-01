@@ -73,6 +73,16 @@ var FormView = Backbone.View.extend({
 			that.submitForm(ev);
 		});
 
+		// Global escape key
+		$(window).on('keypress', function(ev) {
+			if(ev.keyCode == 27) {
+				ev.preventDefault();
+				window.livemap.switchToExhibit();
+				return false;
+			}
+			return true;
+		});
+
 		this.delegateEvents();
 	},
 	moveToQuadrant: function(quadrant) {
