@@ -1,6 +1,7 @@
 *~
 *pyc
 /output
+/node_modules
 database.sqlite
 _database.sqlite
 config.py

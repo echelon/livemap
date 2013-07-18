@@ -6,6 +6,7 @@
 *pyc
 
 # Build and deploy tools, dirs
+node_modules/
 output/
 upload_production.sh
 upload_staging.sh

@@ -4,8 +4,13 @@
 {% block title %}Locaton List{% endblock %}
 
 {% block extraBody %}
-  <script type="text/javascript"
-    src="/static/js/admin.js{{ cache_buster() }}"></script>
+  {% if config.ENVIRONMENT_DEV %}
+    <script type="text/javascript"
+      src="/static/admin.out.js{{ cache_buster() }}"></script>
+  {% else %}
+    <script type="text/javascript"
+      src="/static/admin.out.min.js{{ cache_buster() }}"></script>
+  {% endif %}
   <script type="text/javascript">
     $(function() {
         install_admin();

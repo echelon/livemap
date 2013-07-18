@@ -13,16 +13,13 @@
 
 
 {% block extraBody %}
-  <script type="text/javascript"
-    src="/static/js/map.js{{ cache_buster() }}"></script>
-  <script type="text/javascript"
-    src="/static/js/marker.js{{ cache_buster() }}"></script>
-  <script type="text/javascript"
-    src="/static/js/form.js{{ cache_buster() }}"></script>
-  <script type="text/javascript"
-    src="/static/js/modality.js{{ cache_buster() }}"></script>
-  <script type="text/javascript"
-    src="/static/js/main.js{{ cache_buster() }}"></script>
+  {% if config.ENVIRONMENT_DEV %}
+    <script type="text/javascript"
+      src="/static/script.out.js{{ cache_buster() }}"></script>
+  {% else %}
+    <script type="text/javascript"
+      src="/static/script.out.min.js{{ cache_buster() }}"></script>
+  {% endif %}
   <script type="text/javascript">
     $(function() {
         install_livemap();

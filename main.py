@@ -132,7 +132,8 @@ def location(locId):
 	elif request.method == 'UPDATE':
 		return 'TODO'
 
-	return render_template('location_show.html', location=location)
+	#return render_template('location_show.html', location=location)
+	return 'TODO'
 
 # ----------------
 # AJAX API GATEWAY
