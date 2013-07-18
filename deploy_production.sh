@@ -12,12 +12,6 @@ function print_status() {
 	echo ''
 }
 
-#print_status 'Running build script'
-#python build.py
-
-print_status 'Compiling LESS'
-lessc --yui-compress static/less/main.less > output/design.out.css
-
 #
 # DREAMHOST DYNAMIC/PASSENGER
 #
@@ -27,9 +21,6 @@ rsync . isiglobal@isimobile.com:/home/isiglobal/map.isimobile.com/flaskapp
 
 print_status 'Static Assets: Running rsync to map.isimobile.com'
 rsync ./static/ isiglobal@isimobile.com:/home/isiglobal/map.isimobile.com/public/static
-
-print_status 'LessCSS: Running rsync to map.isimobile.com'
-rsync ./output/ isiglobal@isimobile.com:/home/isiglobal/map.isimobile.com/public/static
 
 print_status 'Restarting Python on map.isimobile.com'
 ssh -n -f isiglobal@isimobile.com "sh -c 'touch map.isimobile.com/tmp/restart.txt'"
