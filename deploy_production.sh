@@ -22,6 +22,9 @@ rsync . isiglobal@isimobile.com:/home/isiglobal/map.isimobile.com/flaskapp
 print_status 'Static Assets: Running rsync to map.isimobile.com'
 rsync ./static/ isiglobal@isimobile.com:/home/isiglobal/map.isimobile.com/public/static
 
+print_status 'Killing Python on map.isimobile.com'
+ssh -n -f isiglobal@isimobile.com "sh -c 'killall python'"
+
 print_status 'Restarting Python on map.isimobile.com'
 ssh -n -f isiglobal@isimobile.com "sh -c 'touch map.isimobile.com/tmp/restart.txt'"
 
